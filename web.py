@@ -6,7 +6,7 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2,preprocess_input as mobilenet_v2_preprocess_input
 
-model = tf.keras.models.load_model("https://drive.google.com/file/d/1UXDdOYHGylpczA5EVp2O50reDLzdlYH9/view?usp=sharing")
+model = tf.keras.models.load_model("Breast_cancer.h5") 
 selected = option_menu(None, ["Diagnostic", "More"], 
     icons=[ "upload", 'bookmark-fill'], 
     menu_icon="cast", default_index=0, orientation="horizontal",
@@ -14,20 +14,20 @@ selected = option_menu(None, ["Diagnostic", "More"],
         "container": {"padding": "0!important", "background-color": "#fafafa"},
         "icon": {"color": "orange", "font-size": "25px"}, 
         "nav-link": {"font-size": "25px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
-        "nav-link-selected": {"background-color": "green"}
+        "nav-link-selected": {"background-color": "laurel"}
     }
 )
 if selected == "Diagnostic":
    uploaded_file = st.file_uploader("Choose an image file", type=["jpg","jpeg","png"])
 
-   map_dict = {0: 'BENIGN',
-            1: 'MALIGNANT',
-            2: 'NORMAL'}
-    
+   map_dict = {0: 'BENIGN CASE',
+            1: 'MALIGNANT CASE',
+            2: 'NORMAL CASE'}
+
  
    if uploaded_file is not None:
-            img = image.load_img(uploaded_file,target_size=(200,200))
-            ima = image.load_img(uploaded_file,target_size=(200,200))
+            img = image.load_img(uploaded_file.name,target_size=(200,200))
+            ima = image.load_img(uploaded_file.name,target_size=(200,200))
             st.image(ima, channels="RGB")
             img = img_to_array(img)
             img = img.reshape(1,200,200,3)
@@ -81,4 +81,3 @@ if selected == "More":
     st.write("""**Xạ trị**: là chiếu tia bức xạ vào vùng bệnh nhằm mục tiêu phá hủy tế bào ung thư. Xạ trị có thể được thực hiện sau phẫu thuật hoặc sau hóa trị.""")
     st.write("""**Liệu pháp nội tiết**: là điều trị quan trọng nhất dành cho trường hợp UTV có thụ thể nội tiết ER (+) và/hoặc PR (+). Thuốc ức chế hoặc ngăn chận tác động của các hormon nội tiết – được biết là có liên quan đến quá trình tăng sinh tế bào ung thư. Liệu pháp nội tiết có thể được sử dụng sau phẫu thuật hoặc giai đoạn muộn.""")
     st.write("""**Liệu pháp kháng HER2**: à điều trị quan trọng dành cho trường hợp UTV có HER2 dương tính. Thuốc ức chế tác động của các thụ thể HER2 – được biết là có liên quan quá trình tăng sinh tế bào ung thư.""")
-    st.title("Để biết thêm thông tin chi tiết: https://benhvienk.vn/ung-thu-vu-va-nhung-dieu-ban-khong-nen-bo-qua-nd91360.html/")

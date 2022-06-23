@@ -90,9 +90,9 @@ frm.pack(side=BOTTOM, padx=15, pady=15)
 
 lbl = Label(root,
             text = "DETECT BREAST CANCER", 
-            fg= "white", 
+            fg= "indigo", 
             font=("Arial", 30), 
-            background="gray"
+            background="plum"
             )
 lbl.pack(padx=10, pady= 10)
 
